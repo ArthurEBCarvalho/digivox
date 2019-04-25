@@ -1,0 +1,19 @@
+.tabelaList{
+	width: 50%;
+}
+
+.menu{
+	background-color: #006080;
+}
+
+.title {
+	text-align: center;
+}
+
+.dropdown-menu li {
+	width: 160px;
+}
+
+.margin-top-50 {
+	margin-top: 50px;
+}

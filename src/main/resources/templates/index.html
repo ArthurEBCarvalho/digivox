@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Digivox</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="materialize/css/materialize.min.css" media="screen,projection" />
+
+<!--Let browser know website is optimized for mobile-->
+<link rel="stylesheet" href="/style/bootstrap.css" />
+<link rel="stylesheet" href="/style/styleCss.css" />
+</head>
+<body>
+
+	<header>
+		<nav class="menu container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button"
+							id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="true">
+							<i class="material-icons left">format_list_bulleted</i> Menu<span
+								class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+							<li><a href="/">Dashboard</a></li>
+							<li><a href="/tipoItens">Tipos de Itens</a></li>
+							<li><a href="/itens">Itens</a></li>
+							<li><a href="/clientes">Clientes</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/alugueis/reservar">Reservar Item</a></li>
+							<li><a href="/alugueis?tipo=Reserva">Cancelar Reserva</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/alugueis/alugar">Alugar Item</a></li>
+							<li><a href="/alugueis?tipo=Aluguel">Devolução de Item</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4 title">
+					<h3>Dashboard</h3>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="container">
+				<h3>Itens que serão devolvidos nesta semana:</h3>
+				<table class="container">
+					<thead>
+						<tr>
+							<th>Item</th>
+							<th>Valor</th>
+							<th>Período</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="devolvido : ${devolvidos}">
+							<td><span th:text="${devolvido.getItem().nome}"></span></td>
+							<td><span th:text="${numberFormat.format(devolvido.valor)}"></span></td>
+							<td><span th:text="${dateFormat.format(devolvido.inicio)}"></span>
+								à <span th:text="${dateFormat.format(devolvido.fim)}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="container">
+				<h3>Itens alugados nesta semana:</h3>
+				<table class="container">
+					<thead>
+						<tr>
+							<th>Item</th>
+							<th>Valor</th>
+							<th>Período</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="alugado : ${alugados}">
+							<td><span th:text="${alugado.getItem().nome}"></span></td>
+							<td><span th:text="${numberFormat.format(alugado.valor)}"></span></td>
+							<td><span th:text="${dateFormat.format(alugado.inicio)}"></span>
+								à <span th:text="${dateFormat.format(alugado.fim)}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="container">
+				<h3>Itens reservados:</h3>
+				<table class="container">
+					<thead>
+						<tr>
+							<th>Item</th>
+							<th>Valor</th>
+							<th>Período</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="reservado : ${reservados}">
+							<td><span th:text="${reservado.getItem().nome}"></span></td>
+							<td><span th:text="${numberFormat.format(reservado.valor)}"></span></td>
+							<td><span th:text="${dateFormat.format(reservado.inicio)}"></span>
+								à <span th:text="${dateFormat.format(reservado.fim)}"></span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+</body>
+</html>

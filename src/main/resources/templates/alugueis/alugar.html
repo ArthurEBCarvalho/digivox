@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Digivox</title>
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet"
+	href="/materialize/css/materialize.min.css" media="screen,projection" />
+
+<!--Let browser know website is optimized for mobile-->
+<link rel="stylesheet" href="/style/bootstrap.css" />
+<link rel="stylesheet" href="/style/styleCss.css" />
+</head>
+<body>
+
+	<header>
+		<nav class="menu container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="dropdown">
+						<button class="btn btn-default dropdown-toggle" type="button"
+							id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="true">
+							<i class="material-icons left">format_list_bulleted</i> Menu<span
+								class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+							<li><a href="/">Dashboard</a></li>
+							<li><a href="/tipoItens">Tipos de Itens</a></li>
+							<li><a href="/itens">Itens</a></li>
+							<li><a href="/clientes">Clientes</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/alugueis/reservar">Reservar Item</a></li>
+							<li><a href="/alugueis?tipo=Reserva">Cancelar Reserva</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="/alugueis/alugar">Alugar Item</a></li>
+							<li><a href="/alugueis?tipo=Aluguel">Devolução de Item</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4 title">
+					<h3>Alugar</h3>
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+	<th:block th:include="mensagem"></th:block>
+
+	<div class="container">
+		<form class="container" method="post" action="/alugueis">
+			<input type="hidden" name="tipo" value="Aluguel"> <label>Data
+				Inicial: </label> <input type="date" name="inicio" th:value="${hoje}"
+				readonly required /> <label>Data Final: </label> <input type="date" value=""
+				name="fim" th:min="${hoje}" required /> <label>Valor: </label><input
+				type="number" value="" name="valor" step="0.01" required /> <label>Cliente:
+			</label><select name="cliente">
+				<option th:each="cliente : ${clientes}" th:value="${cliente.id}"
+					th:text="${cliente.nome}"></option>
+			</select> <label>Item: </label><select name="item">
+				<option th:each="item : ${itens}" th:value="${item.id}"
+					th:text="${item.nome}"></option>
+			</select>
+			<button class="waves-effect waves-light btn" type="submit">Salvar</button>
+		</form>
+	</div>
+
+	<script type="text/javascript" src="/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('select').material_select();
+		});
+	</script>
+</body>
+
+
+</html>
